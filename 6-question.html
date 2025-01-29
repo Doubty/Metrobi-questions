@@ -1,0 +1,95 @@
+<!-- Para testar este problema podemos usar o navegador - chrome -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeno's Paradox - Achilles and the Tortoise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+        }
+
+        #container {
+            position: relative;
+            width: 800px;
+            height: 200px;
+            margin: 50px auto;
+            border: 2px solid black;
+            background-color: #e0e0e0;
+        }
+
+        .character {
+            position: absolute;
+            top: 40px;
+            width: 30px;
+            height: 30px;
+            background-color: blue;
+            border-radius: 50%;
+        }
+
+        #tortoise {
+            background-color: green;
+        }
+
+        #achilles {
+            background-color: red;
+        }
+
+        .label {
+            position: absolute;
+            bottom: -20px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Zeno's Paradox: Achilles and the Tortoise</h1>
+    <p>This animation demonstrates the paradox where Achilles chases the tortoise but seemingly never overtakes it.</p>
+
+    <div id="container">
+        <div id="tortoise" class="character"></div>
+        <div id="achilles" class="character"></div>
+    </div>
+
+    <script>
+        let achillesSpeed = 5;
+        let tortoiseSpeed = 2;
+        let tortoiseStart = 100;
+        let achillesPosition = 0;
+        let tortoisePosition = tortoiseStart;
+
+        const containerWidth = document.getElementById('container').offsetWidth;
+        const achillesElem = document.getElementById('achilles');
+        const tortoiseElem = document.getElementById('tortoise');
+
+
+        function animate() {
+
+            achillesPosition += achillesSpeed;
+            tortoisePosition += tortoiseSpeed;
+
+
+            achillesElem.style.left = `${Math.min(achillesPosition, containerWidth - 30)}px`;
+            tortoiseElem.style.left = `${Math.min(tortoisePosition, containerWidth - 30)}px`;
+
+
+            if (achillesPosition >= tortoisePosition) {
+                console.log("Achilles caught up with the tortoise!");
+                clearInterval(animationInterval);
+            }
+        }
+
+
+        const animationInterval = setInterval(animate, 100); 
+    </script>
+
+</body>
+
+</html>
